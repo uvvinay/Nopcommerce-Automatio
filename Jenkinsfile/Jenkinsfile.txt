@@ -1,0 +1,48 @@
+pipeline {
+    agent any
+
+    environment {
+        // Ensuring Python output is visible in Jenkins logs immediately
+        PYTHONUNBUFFERED = '1'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                // Pulls code from your updated origin (uvvinay/Nopcommerce-Automatio)
+                git branch: 'master', url: 'https://github.com/uvvinay/Nopcommerce-Automatio.git'
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                script {
+                    // It's best practice to install requirements before running the .bat
+                    bat 'pip install -r requirements.txt'
+                }
+            }
+        }
+
+        stage('Run Automation') {
+            steps {
+                echo 'Executing Selenium Tests via Batch File...'
+                // Replace 'run_tests.bat' with the actual name of your file
+                bat 'run_tests.bat'
+            }
+        }
+    }
+
+    post {
+        always {
+            echo 'Archiving Test Results...'
+            // If your framework generates HTML or XML reports, archive them here
+            archiveArtifacts artifacts: 'reports/*.html', allowEmptyArchive: true
+        }
+        success {
+            echo 'Automation Suite Passed!'
+        }
+        failure {
+            echo 'Automation Suite Failed. Check the logs.'
+        }
+    }
+}
