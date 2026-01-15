@@ -1,4 +1,6 @@
 selenium
+python3
 pytest
 pytest-html
+allure-pytest
 webdriver-manager
