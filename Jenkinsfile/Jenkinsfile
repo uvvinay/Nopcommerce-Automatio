@@ -18,8 +18,12 @@ pipeline {
             steps {
                 script {
                     // It's best practice to install requirements before running the .bat
-                    "python3 -m venv venv"
-                    "./venv/bin/pip install -r requirements.txt"
+                    sh '''
+                        python3 -m venv venv
+                        ./venv/bin/pip install -r requirements.txt
+                        echo "--- VENV CONTENTS ---"
+                        ls venv/bin
+                    '''
                 }
             }
         }
@@ -28,8 +32,22 @@ pipeline {
             steps {
                 echo 'Executing Selenium Tests via Batch File...'
                 // Replace 'run_tests.bat' with the actual name of your file
-                sh "chmod +x run.sh"
-                sh './run.sh'
+                sh '''
+                    echo "--- CURRENT DIRECTORY ---"
+                    pwd
+                    ls -la
+            
+                    # Check if pytest exists inside venv
+                    if [ -f "./venv/bin/pytest" ]; then
+                        echo "Pytest found in venv"
+                    else
+                        echo "Pytest NOT found in venv!"
+                    fi
+
+                    chmod +x run.sh
+                    ./run.sh
+                '''
+                
             }
         }
     }
