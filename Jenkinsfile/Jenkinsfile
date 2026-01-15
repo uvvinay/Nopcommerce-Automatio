@@ -29,7 +29,7 @@ pipeline {
                 echo 'Executing Selenium Tests via Batch File...'
                 // Replace 'run_tests.bat' with the actual name of your file
                 sh "chmod +x run.sh"
-                sh 'run.sh'
+                sh './run.sh'
             }
         }
     }
