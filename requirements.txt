@@ -1,5 +1,7 @@
-selenium
+
 python3
+python3-pip
+selenium
 pytest
 pytest-html
 allure-pytest
