@@ -18,7 +18,7 @@ pipeline {
             steps {
                 script {
                     // It's best practice to install requirements before running the .bat
-                    bat 'pip install -r requirements.txt'
+                    sh 'pip install -r requirements.txt'
                 }
             }
         }
@@ -27,7 +27,7 @@ pipeline {
             steps {
                 echo 'Executing Selenium Tests via Batch File...'
                 // Replace 'run_tests.bat' with the actual name of your file
-                bat 'run_tests.bat'
+                sh 'run.sh'
             }
         }
     }
