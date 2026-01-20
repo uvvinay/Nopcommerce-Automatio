@@ -1,5 +1,6 @@
 from selenium import webdriver
 import pytest
+import undetected_chromedriver as uc
 from selenium.webdriver.common.service import Service
 
 
@@ -19,7 +20,11 @@ from selenium.webdriver.common.service import Service
 
 @pytest.fixture
 def setup():
-   driver = webdriver.Chrome()
+   options= uc.ChromeOptions()
+   #options.add_argument('--headless=new')
+   options.add_argument('--no-sandbox')
+   options.add_argument("--disable-blink-features=AutomationControlled")
+   driver = uc.Chrome(options=options)
    return driver
 #to avoid the duplicate code or repeated code we can created this config
 #file and call the setup method where we cau re use this drivers
@@ -45,7 +50,7 @@ def pytest_configure(config):
     config.metadata['Tester'] = 'Vinay'
 
 
-@pytest.mark.optionalhook
+@pytest.hookimpl(optionalhook=True)
 def pytest_metadata(metadata):
     metadata.pop("JAVA_HOME", None)
     metadata.pop("plugins", None)
