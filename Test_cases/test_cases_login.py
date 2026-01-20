@@ -28,14 +28,14 @@ class TestLogin_001:
         self.driver.get(self.baseURL)
         self.driver.maximize_window()
         acttitle = self.driver.title
-        if acttitle == "Your store. Login":
+        if acttitle == "nopCommerce demo store. Login":
             assert True
             print(acttitle)
             self.logger.info("*************** Verify_home_page_title is passed **************")
             self.driver.close()
         else:
-            self.driver.save_screenshot("./Screenshots/login.png")
-            self.logger.warn("*************** Verify_home_page_title is failed **************")
+            self.driver.save_screenshot("./Screen_shots/login.png")
+            self.warning("*************** Verify_home_page_title is failed **************")
             self.driver.close()
             assert False
 
