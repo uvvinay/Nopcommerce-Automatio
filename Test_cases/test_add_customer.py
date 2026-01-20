@@ -26,10 +26,12 @@ class Test_002_AddCustomer:
         self.lp.setUsername(self.username)
         self.lp.setpassword(self.password)
         self.lp.clickLoginButton()
-        time.sleep(1)
+        self.driver.implicitly_wait(2)
         self.logger.info('***** login successful *****')
         self.driver.maximize_window()
         self.add_cust = AddCustomer(self.driver)
+        self.add_cust = AddCustomer(self.driver)
+        self.add_cust.close_info_popup()
         self.add_cust.customer_main_menu()
         self.add_cust.customer_sub_menu()
         add_title = self.driver.title
@@ -85,7 +87,7 @@ class Test_002_AddCustomer:
             self.logger.info("***** Test add customer passed *****")
             self.driver.close()
         else:
-            self.driver.get_screenshot_as_file("D:\Local_Disk\Selenium_practice_v4\Selenium_Nop_commerse\Screen_Shots\Add_customer_failed.png")
+            self.driver.get_screenshot_as_file("./Screen_Shots/Add_customer_failed.png")
             self.logger.error('***** Add customer test case failed *****')
             self.driver.close()
             #assert False

@@ -6,7 +6,7 @@ from selenium.webdriver.support.select import Select
 
 class AddCustomer:
     link_customer_main_menu_xpath ='/html/body/div[3]/aside/div/nav/ul/li[4]/a'
-    link_customer_sub_menu_xpath = '/html/body/div[3]/aside/div/div[4]/div/div/nav/ul/li[4]/ul/li[1]/a/p'
+    link_customer_sub_menu_xpath = "/html/body/div[3]/aside/div/nav/ul/li[4]/ul/li[1]/a/p"
     btn_add_customer_xpath = "//a[@class='btn btn-primary']"
     txtbox_email_id = "Email"
     txtbox_password_id = "Password"
@@ -39,13 +39,23 @@ class AddCustomer:
 
     def __init__(self,driver):
         self.driver = driver
+    def close_info_popup(self):
+        try:
+            # Locator for the 'Ok' button in the 'Failed to load statistics' popup
+            ok_button = self.driver.find_element(By.XPATH, "//button[text()='Ok']")
+            if ok_button.is_displayed():
+                ok_button.click()
+                time.sleep(1) # Short pause to let the overlay disappear
+        except:
+        # If the popup doesn't appear, just continue
+            pass
 
     def customer_main_menu(self):
         self.driver.find_element(by=By.XPATH,value=self.link_customer_main_menu_xpath).click()
         #self.driver.find_element(by=By.XPATH,value=self.link_customer_main_menu_xpath).send_keys()
 
     def customer_sub_menu(self):
-        self.driver.find_element(by=By.XPATH, value=self.D).click()
+        self.driver.find_element(by=By.XPATH, value=self.link_customer_sub_menu_xpath).click()
 
     def add_customer(self):
         self.driver.find_element(by=By.XPATH, value=self.btn_add_customer_xpath).click()
@@ -92,7 +102,7 @@ class AddCustomer:
 
     def customer_roles(self,role):
         #self.driver.find_element(by=By.XPATH, value=self.lstcustomer_role_xpath).click()
-        time.sleep(3)
+        self.driver.implicitly_wait(10)
         if role == "Registered":
             self.lstroles = self.driver.find_element(by=By.XPATH, value=self.lst_cutomer_roles_registered_xpath)
         elif role == 'Administartors':
