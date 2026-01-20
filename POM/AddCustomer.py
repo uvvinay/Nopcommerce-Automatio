@@ -5,7 +5,7 @@ from selenium.webdriver.support.select import Select
 
 
 class AddCustomer:
-    #link_customer_main_menu_xpath ='//body/div[3]/aside[1]/div[1]/div[4]/div[1]/div[1]/nav[1]/ul[1]/li[4]/a[1]'
+    link_customer_main_menu_xpath ='/html/body/div[3]/aside/div/nav/ul/li[4]/a'
     link_customer_sub_menu_xpath = '/html/body/div[3]/aside/div/div[4]/div/div/nav/ul/li[4]/ul/li[1]/a/p'
     btn_add_customer_xpath = "//a[@class='btn btn-primary']"
     txtbox_email_id = "Email"

@@ -10,9 +10,9 @@ import time
 
 
 class TestLogin_001:
-    #baseURL = ReadConfig.getAppUrl
-    #username = ReadConfig.getUsername
-    #password = ReadConfig.getPassword
+    #baseURL = ReadConfig.getAppUrl()
+    #username = ReadConfig.getUsername()
+    #password = ReadConfig.getPassword()
     baseURL = 'https://admin-demo.nopcommerce.com/login'
     username = "admin@yourstore.com"
     password = "admin"
@@ -47,7 +47,6 @@ class TestLogin_001:
         self.driver = setup
         self.lp = login(self.driver)
         self.driver.maximize_window()
-        #self.driver.set_page_load_timeout(300)
         self.driver.get(self.baseURL)
         self.lp.setUsername(self.username)
         self.lp.setpassword(self.password)
